@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Triết Học Quiz — HNUE</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0b1020;
+    color:#f5f7ff;
+    min-height:100vh;
+}
+
+button{
+    font-family:inherit;
+}
+
+.app{
+    min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    height:70px;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#11182d;
+    border-bottom:1px solid #26304d;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#7c5cff,#3d8bff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.logo-text h1{
+    font-size:17px;
+}
+
+.logo-text span{
+    font-size:11px;
+    color:#9da8c4;
+}
+
+.header-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.header-buttons button{
+    border:1px solid #303b5c;
+    background:#18213a;
+    color:#dce3f7;
+    border-radius:9px;
+    padding:9px 13px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.header-buttons button:hover{
+    background:#263354;
+}
+
+/* ================= LAYOUT ================= */
+
+.layout{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    min-height:calc(100vh - 70px);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    background:#0e1528;
+    border-right:1px solid #26304d;
+    padding:20px 14px;
+}
+
+.sidebar-title{
+    color:#8995b3;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin:5px 10px 10px;
+}
+
+.mode{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#bac4dc;
+    text-align:left;
+    padding:11px 12px;
+    border-radius:9px;
+    cursor:pointer;
+    margin-bottom:4px;
+}
+
+.mode:hover{
+    background:#19223b;
+}
+
+.mode.active{
+    background:#253158;
+    color:white;
+}
+
+.topic-list{
+    margin-top:20px;
+}
+
+.topic{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#9da8c4;
+    text-align:left;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.topic:hover{
+    background:#18223b;
+    color:white;
+}
+
+.topic.active{
+    background:#1e2b4c;
+    color:#8faeff;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    padding:30px;
+    max-width:1250px;
+    width:100%;
+    margin:auto;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:230px;
+    border-radius:20px;
+    padding:30px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(90deg,rgba(8,13,30,.97),rgba(8,13,30,.65)),
+        url("https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1400&q=80")
+        center/cover;
+    border:1px solid #2a3555;
+    margin-bottom:25px;
+}
+
+.hero-content{
+    max-width:750px;
+}
+
+.badge{
+    display:inline-block;
+    background:#27355d;
+    color:#9db6ff;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:11px;
+    margin-bottom:10px;
+}
+
+.hero h2{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    color:#b3bdd4;
+    line-height:1.6;
+}
+
+/* ================= CONTROL PANEL ================= */
+
+.panel{
+    background:#11182c;
+    border:1px solid #283452;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.panel-title{
+    font-size:15px;
+    margin-bottom:16px;
+}
+
+.controls{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.control label{
+    display:block;
+    color:#8995b3;
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+.control select{
+    width:100%;
+    padding:11px;
+    border-radius:9px;
+    border:1px solid #303b5c;
+    background:#18213a;
+    color:white;
+    outline:none;
+}
+
+.start-area{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:16px;
+}
+
+.start-btn{
+    border:0;
+    background:linear-gradient(135deg,#7659ff,#3b8cff);
+    color:white;
+    padding:12px 25px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:0 8px 25px rgba(73,90,255,.2);
+}
+
+.start-btn:hover{
+    transform:translateY(-1px);
+}
+
+/* ================= QUIZ ================= */
+
+.quiz{
+    display:none;
+}
+
+.quiz.active{
+    display:block;
+}
+
+.quiz-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.progress-text{
+    color:#aeb8d0;
+    font-size:13px;
+}
+
+.progress{
+    height:7px;
+    background:#202b47;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#7659ff,#3b8cff);
+    transition:.3s;
+}
+
+.question-card{
+    background:#11182c;
+    border:1px solid #283452;
+    border-radius:18px;
+    padding:28px;
+}
+
+.question-meta{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.tag{
+    font-size:11px;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#202c4c;
+    color:#9eb1e9;
+}
+
+.question{
+    font-size:21px;
+    line-height:1.55;
+    margin-bottom:25px;
+}
+
+.answers{
+    display:grid;
+    gap:12px;
+}
+
+.answer{
+    width:100%;
+    text-align:left;
+    padding:16px;
+    border-radius:12px;
+    border:1px solid #303b5c;
+    background:#171f35;
+    color:#e7ebf8;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.answer:hover{
+    background:#202b48;
+    border-color:#536899;
+}
+
+.answer.correct{
+    background:#123526;
+    border-color:#35c982;
+    color:#8af0be;
+}
+
+.answer.wrong{
+    background:#3a1820;
+    border-color:#ed6373;
+    color:#ff9ba7;
+}
+
+.answer.disabled{
+    cursor:default;
+}
+
+.explanation{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    border-radius:11px;
+    background:#18223b;
+    color:#b9c4dd;
+    line-height:1.6;
+    border-left:3px solid #7659ff;
+}
+
+.explanation.show{
+    display:block;
+}
+
+.quiz-navigation{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+}
+
+.nav-btn{
+    border:1px solid #303b5c;
+    background:#18213a;
+    color:#dce4f7;
+    padding:10px 17px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+.nav-btn:hover{
+    background:#253253;
+}
+
+.nav-btn.primary{
+    background:#6652e8;
+    border-color:#6652e8;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.stat{
+    background:#11182c;
+    border:1px solid #283452;
+    padding:17px;
+    border-radius:13px;
+}
+
+.stat small{
+    color:#8995b3;
+}
+
+.stat strong{
+    display:block;
+    font-size:22px;
+    margin-top:5px;
+}
+
+/* ================= RESULT ================= */
+
+.result{
+    display:none;
+}
+
+.result.active{
+    display:block;
+}
+
+.result-card{
+    background:#11182c;
+    border:1px solid #283452;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+}
+
+.result-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.result-score{
+    font-size:55px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.result-sub{
+    color:#a8b3cb;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:25px 0;
+}
+
+.result-item{
+    background:#18213a;
+    padding:16px;
+    border-radius:11px;
+}
+
+.result-item small{
+    color:#8e9ab5;
+}
+
+.result-item strong{
+    display:block;
+    margin-top:5px;
+}
+
+.result-message{
+    background:#18223b;
+    border-radius:12px;
+    padding:18px;
+    text-align:left;
+    line-height:1.7;
+    color:#c2cae0;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    text-align:center;
+    padding:30px;
+    color:#68748f;
+    font-size:12px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    z-index:100;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(700px,100%);
+    max-height:85vh;
+    overflow:auto;
+    background:#11182c;
+    border:1px solid #34415f;
+    border-radius:17px;
+    padding:25px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.close{
+    border:0;
+    background:#222d49;
+    color:white;
+    width:34px;
+    height:34px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.library-item{
+    padding:15px;
+    background:#18213a;
+    border-radius:10px;
+    margin-bottom:9px;
+}
+
+.library-item strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.library-item span{
+    color:#909bb4;
+    font-size:12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .main{
+        padding:18px;
+    }
+
+    .controls{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h2{
+        font-size:25px;
+    }
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:0 12px;
+    }
+
+    .logo-text{
+        display:none;
+    }
+
+    .header-buttons button{
+        padding:8px;
+        font-size:11px;
+    }
+
+    .hero{
+        min-height:250px;
+        padding:22px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+
+    .controls{
+        grid-template-columns:1fr;
+    }
+
+    .question-card{
+        padding:20px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+    .stats,
+    .result-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quiz-navigation{
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+        <div class="logo-icon">Φ</div>
+
+        <div class="logo-text">
+            <h1>Triết Học Quiz</h1>
+            <span>HNUE Philosophy Learning System</span>
+        </div>
+    </div>
+
+    <div class="header-buttons">
+        <button onclick="resetQuiz()">↻ Làm mới</button>
+        <button onclick="openLibrary()">▦ Ngân hàng</button>
+        <button onclick="openHNUE()">🎓 HNUE</button>
+    </div>
+
+</header>
+
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Chế độ
+    </div>
+
+    <button class="mode active" id="mode-general" onclick="setMode('general',this)">
+        ◈ Tổng hợp
+    </button>
+
+    <button class="mode" id="mode-hnue" onclick="setMode('hnue',this)">
+        🎓 Chương trình HNUE
+    </button>
+
+    <button class="mode" id="mode-adaptive" onclick="setMode('adaptive',this)">
+        ◉ Thi thích ứng
+    </button>
+
+
+    <div class="topic-list">
+
+        <div class="sidebar-title">
+            Chủ đề
+        </div>
+
+        <button class="topic active" onclick="setTopic('all',this)">
+            Tất cả chủ đề
+        </button>
+
+        <button class="topic" onclick="setTopic('Mác–Lênin',this)">
+            Triết học Mác–Lênin
+        </button>
+
+        <button class="topic" onclick="setTopic('Duy vật biện chứng',this)">
+            Duy vật biện chứng
+        </button>
+
+        <button class="topic" onclick="setTopic('Duy vật lịch sử',this)">
+            Duy vật lịch sử
+        </button>
+
+        <button class="topic" onclick="setTopic('Lịch sử phép biện chứng',this)">
+            Lịch sử phép biện chứng
+        </button>
+
+        <button class="topic" onclick="setTopic('Logic học',this)">
+            Logic học
+        </button>
+
+        <button class="topic" onclick="setTopic('Mỹ học',this)">
+            Mỹ học
+        </button>
+
+        <button class="topic" onclick="setTopic('Đạo đức học',this)">
+            Đạo đức học
+        </button>
+
+        <button class="topic" onclick="setTopic('Tôn giáo học',this)">
+            Tôn giáo học
+        </button>
+
+        <button class="topic" onclick="setTopic('Triết học Hy Lạp',this)">
+            Triết học Hy Lạp cổ đại
+        </button>
+
+        <button class="topic" onclick="setTopic('Triết học phương Đông',this)">
+            Triết học phương Đông
+        </button>
+
+        <button class="topic" onclick="setTopic('Triết học cận–hiện đại',this)">
+            Triết học cận – hiện đại
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                PHILOSOPHY • QUIZ • HNUE
+            </span>
+
+            <h2>
+                Khám phá tư duy triết học của bạn
+            </h2>
+
+            <p>
+                Hệ thống trắc nghiệm triết học từ nhận biết,
+                thông hiểu đến vận dụng và nâng cao.
+                Kết quả chỉ phản ánh xu hướng trả lời trong
+                phiên làm bài hiện tại.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+
+    <section class="panel">
+
+        <div class="panel-title">
+            ⚙ Thiết lập bài kiểm tra
+        </div>
+
+        <div class="controls">
+
+            <div class="control">
+
+                <label>Số câu hỏi</label>
+
+                <select id="questionCount">
+
+                    <option value="10">10 câu</option>
+                    <option value="15">15 câu</option>
+                    <option value="20">20 câu</option>
+                    <option value="30">30 câu</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="control">
+
+                <label>Mức độ</label>
+
+                <select id="difficulty">
+
+                    <option value="all">Tất cả</option>
+                    <option value="Nhận biết">Nhận biết</option>
+                    <option value="Thông hiểu">Thông hiểu</option>
+                    <option value="Vận dụng">Vận dụng</option>
+                    <option value="Nâng cao">Nâng cao</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="control">
+
+                <label>Chủ đề</label>
+
+                <select id="topicSelect">
+
+                    <option value="all">Tất cả</option>
+                    <option value="Mác–Lênin">Triết học Mác–Lênin</option>
+                    <option value="Duy vật biện chứng">Duy vật biện chứng</option>
+                    <option value="Duy vật lịch sử">Duy vật lịch sử</option>
+                    <option value="Lịch sử phép biện chứng">Lịch sử phép biện chứng</option>
+                    <option value="Logic học">Logic học</option>
+                    <option value="Mỹ học">Mỹ học</option>
+                    <option value="Đạo đức học">Đạo đức học</option>
+                    <option value="Tôn giáo học">Tôn giáo học</option>
+                    <option value="Triết học Hy Lạp">Triết học Hy Lạp</option>
+                    <option value="Triết học phương Đông">Triết học phương Đông</option>
+                    <option value="Triết học cận–hiện đại">Triết học cận–hiện đại</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="control">
+
+                <label>Trộn đáp án</label>
+
+                <select id="shuffleAnswers">
+
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="start-area">
+
+            <button class="start-btn" onclick="startQuiz()">
+                ▶ Bắt đầu
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ -->
+
+    <section class="quiz" id="quiz">
+
+        <div class="quiz-top">
+
+            <div class="progress-text" id="progressText">
+                Câu 1 / 10
+            </div>
+
+            <div class="progress-text" id="scoreText">
+                Điểm: 0
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div class="progress-bar" id="progressBar"></div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-meta">
+
+                <span class="tag" id="questionTopic">
+                    Triết học
+                </span>
+
+                <span class="tag" id="questionLevel">
+                    Nhận biết
+                </span>
+
+            </div>
+
+
+            <div class="question" id="questionText">
+                Câu hỏi sẽ xuất hiện ở đây.
+            </div>
+
+
+            <div class="answers" id="answers"></div>
+
+
+            <div class="explanation" id="explanation"></div>
+
+
+            <div class="quiz-navigation">
+
+                <button class="nav-btn" onclick="previousQuestion()">
+                    ← Câu trước
+                </button>
+
+                <button class="nav-btn primary" id="nextBtn" onclick="nextQuestion()">
+                    Câu tiếp →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <small>Đã trả lời</small>
+                <strong id="answeredStat">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>Đúng</small>
+                <strong id="correctStat">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>Độ chính xác</small>
+                <strong id="accuracyStat">0%</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section class="result" id="result">
+
+        <div class="result-card">
+
+            <div class="result-icon">🏛️</div>
+
+            <h2>Hoàn thành bài kiểm tra</h2>
+
+            <div class="result-score" id="finalScore">
+                0/10
+            </div>
+
+            <div class="result-sub" id="finalAccuracy">
+                Độ chính xác: 0%
+            </div>
+
+
+            <div class="result-grid">
+
+                <div class="result-item">
+
+                    <small>Số câu đúng</small>
+
+                    <strong id="finalCorrect">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <small>Chủ đề nổi bật</small>
+
+                    <strong id="dominantTopic">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <small>Xu hướng</small>
+
+                    <strong id="tendency">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-message" id="resultMessage">
+                Kết quả sẽ được hiển thị ở đây.
+            </div>
+
+
+            <br>
+
+            <button class="start-btn" onclick="startQuiz()">
+                ↻ Làm lại
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <footer class="footer">
+
+        Triết Học Quiz • Hệ thống học tập cá nhân
+        <br>
+        GitHub Pages • Không sử dụng AI/API
+
+    </footer>
+
+</main>
+
+</div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2 id="modalTitle">
+                Thông tin
+            </h2>
+
+            <button class="close" onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!--
+====================================================
+PHẦN 2 ĐƯỢC DÁN NGAY SAU DÒNG NÀY
+====================================================
+-->
+
+<script> 
+  /* =====================================================
+   TRIẾT HỌC QUIZ
+   JAVASCRIPT ENGINE
+   ===================================================== */
+
+
+/* =====================================================
+   NGÂN HÀNG CÂU HỎI
+   ===================================================== */
+
+const BANK = [
+
+{
+topic:"Mác–Lênin",
+level:"Nhận biết",
+q:"Theo quan điểm của chủ nghĩa duy vật biện chứng, vật chất được hiểu là gì?",
+a:[
+"Thực tại khách quan tồn tại độc lập với ý thức",
+"Những gì con người có thể nhìn thấy",
+"Chỉ những vật thể có khối lượng",
+"Toàn bộ thế giới tinh thần"
+],
+c:0,
+e:"Vật chất là thực tại khách quan, tồn tại độc lập với ý thức và được ý thức phản ánh.",
+tags:["Vật chất","Ý thức"]
+},
+
+{
+topic:"Mác–Lênin",
+level:"Thông hiểu",
+q:"Theo triết học Mác–Lênin, ý thức là sự phản ánh như thế nào?",
+a:[
+"Thụ động và nguyên xi hiện thực khách quan",
+"Năng động, sáng tạo hiện thực khách quan vào bộ óc người",
+"Hoàn toàn độc lập với thế giới khách quan",
+"Chỉ là tổng hợp các cảm giác"
+],
+c:1,
+e:"Ý thức là sự phản ánh năng động, sáng tạo thế giới khách quan vào bộ óc người trên cơ sở thực tiễn xã hội.",
+tags:["Ý thức","Phản ánh"]
+},
+
+{
+topic:"Duy vật biện chứng",
+level:"Nhận biết",
+q:"Mối quan hệ giữa vật chất và ý thức được xác định như thế nào?",
+a:[
+"Ý thức quyết định vật chất",
+"Vật chất quyết định ý thức, ý thức có tính độc lập tương đối và tác động trở lại vật chất",
+"Vật chất và ý thức hoàn toàn tách biệt",
+"Vật chất và ý thức đồng nhất"
+],
+c:1,
+e:"Chủ nghĩa duy vật biện chứng khẳng định vật chất có trước và quyết định ý thức; ý thức có tính độc lập tương đối và tác động trở lại vật chất thông qua hoạt động thực tiễn.",
+tags:["Vật chất","Ý thức"]
+},
+
+{
+topic:"Duy vật biện chứng",
+level:"Thông hiểu",
+q:"Quy luật nào được coi là hạt nhân của phép biện chứng duy vật?",
+a:[
+"Quy luật lượng – chất",
+"Quy luật phủ định của phủ định",
+"Quy luật thống nhất và đấu tranh của các mặt đối lập",
+"Quy luật quan hệ sản xuất"
+],
+c:2,
+e:"Quy luật thống nhất và đấu tranh của các mặt đối lập chỉ ra nguồn gốc, động lực của sự phát triển.",
+tags:["Mâu thuẫn","Biện chứng"]
+},
+
+{
+topic:"Duy vật biện chứng",
+level:"Thông hiểu",
+q:"Quy luật chuyển hóa từ những thay đổi về lượng thành những thay đổi về chất phản ánh điều gì?",
+a:[
+"Cách thức của sự phát triển",
+"Nguồn gốc duy nhất của ý thức",
+"Bản chất của chân lý",
+"Vai trò của thực tiễn"
+],
+c:0,
+e:"Quy luật lượng – chất chỉ ra cách thức cơ bản của sự vận động và phát triển.",
+tags:["Lượng","Chất"]
+},
+
+{
+topic:"Duy vật biện chứng",
+level:"Vận dụng",
+q:"Một sinh viên tích lũy kiến thức từng ngày và đến một thời điểm có thể giải quyết được bài toán trước đây không làm được. Ví dụ này gần nhất với quy luật nào?",
+a:[
+"Quy luật thống nhất và đấu tranh của các mặt đối lập",
+"Quy luật lượng – chất",
+"Quy luật phủ định của phủ định",
+"Quy luật quan hệ sản xuất"
+],
+c:1,
+e:"Sự tích lũy kiến thức là thay đổi về lượng; khi đạt đến điểm nút có thể dẫn đến bước nhảy về chất.",
+tags:["Vận dụng","Lượng–chất"]
+},
+
+{
+topic:"Duy vật biện chứng",
+level:"Nâng cao",
+q:"Trong phép biện chứng duy vật, mâu thuẫn được xem là nguồn gốc của sự phát triển vì sao?",
+a:[
+"Vì mọi sự vật đều hoàn toàn giống nhau",
+"Vì sự thống nhất và đấu tranh giữa các mặt đối lập tạo ra vận động và biến đổi",
+"Vì mâu thuẫn luôn dẫn đến tiêu diệt sự vật",
+"Vì mâu thuẫn chỉ tồn tại trong tư duy"
+],
+c:1,
+e:"Các mặt đối lập vừa thống nhất vừa đấu tranh; sự đấu tranh và giải quyết mâu thuẫn là nguồn gốc, động lực của sự vận động và phát triển.",
+tags:["Mâu thuẫn","Phát triển"]
+},
+
+{
+topic:"Duy vật lịch sử",
+level:"Nhận biết",
+q:"Theo chủ nghĩa duy vật lịch sử, tồn tại xã hội quyết định yếu tố nào?",
+a:[
+"Ý thức xã hội",
+"Nghệ thuật",
+"Tôn giáo cá nhân",
+"Logic hình thức"
+],
+c:0,
+e:"Tồn tại xã hội quyết định ý thức xã hội, mặc dù ý thức xã hội có tính độc lập tương đối.",
+tags:["Tồn tại xã hội"]
+},
+
+{
+topic:"Duy vật lịch sử",
+level:"Thông hiểu",
+q:"Lực lượng sản xuất và quan hệ sản xuất hợp thành phương thức nào?",
+a:[
+"Phương thức tư duy",
+"Phương thức sản xuất",
+"Phương thức nhận thức",
+"Phương thức quản lý"
+],
+c:1,
+e:"Phương thức sản xuất là sự thống nhất giữa lực lượng sản xuất và quan hệ sản xuất.",
+tags:["Phương thức sản xuất"]
+},
+
+{
+topic:"Duy vật lịch sử",
+level:"Vận dụng",
+q:"Khi công nghệ sản xuất phát triển nhanh nhưng quan hệ tổ chức sản xuất không còn phù hợp, vấn đề triết học nào cần được xem xét?",
+a:[
+"Quan hệ giữa lực lượng sản xuất và quan hệ sản xuất",
+"Quan hệ giữa cảm giác và tri giác",
+"Quan hệ giữa nghệ thuật và tôn giáo",
+"Quan hệ giữa cá nhân và ký ức"
+],
+c:0,
+e:"Ví dụ liên quan trực tiếp đến quy luật quan hệ sản xuất phải phù hợp với trình độ phát triển của lực lượng sản xuất.",
+tags:["Lực lượng sản xuất","Quan hệ sản xuất"]
+},
+
+{
+topic:"Lịch sử phép biện chứng",
+level:"Nhận biết",
+q:"Nhà triết học Hy Lạp cổ đại thường được gắn với tư tưởng 'không ai tắm hai lần trên cùng một dòng sông' là ai?",
+a:[
+"Parmenides",
+"Heraclitus",
+"Plato",
+"Aristotle"
+],
+c:1,
+e:"Heraclitus nhấn mạnh sự vận động, biến đổi không ngừng của thế giới.",
+tags:["Heraclitus"]
+},
+
+{
+topic:"Lịch sử phép biện chứng",
+level:"Thông hiểu",
+q:"Đóng góp nổi bật của Heraclitus đối với lịch sử tư tưởng biện chứng là gì?",
+a:[
+"Phủ nhận hoàn toàn vận động",
+"Nhấn mạnh sự vận động, biến đổi và tính thống nhất của các mặt đối lập",
+"Xây dựng chủ nghĩa duy vật biện chứng hoàn chỉnh",
+"Đề cao thế giới ý niệm"
+],
+c:1,
+e:"Heraclitus là một trong những đại biểu tiêu biểu của tư tưởng biện chứng sơ khai trong triết học Hy Lạp.",
+tags:["Biện chứng cổ đại"]
+},
+
+{
+topic:"Logic học",
+level:"Nhận biết",
+q:"Phán đoán trong logic học là gì?",
+a:[
+"Hình thức tư duy dùng để khẳng định hoặc phủ định một thuộc tính hay quan hệ",
+"Một cảm xúc cá nhân",
+"Một hình ảnh trực quan",
+"Một hành động thực tiễn"
+],
+c:0,
+e:"Phán đoán là hình thức tư duy trong đó có sự khẳng định hoặc phủ định về đối tượng.",
+tags:["Phán đoán"]
+},
+
+{
+topic:"Logic học",
+level:"Thông hiểu",
+q:"Suy luận là quá trình tư duy như thế nào?",
+a:[
+"Từ một hoặc một số phán đoán đã biết rút ra phán đoán mới",
+"Chỉ mô tả cảm xúc",
+"Chỉ quan sát hiện tượng",
+"Loại bỏ mọi tiền đề"
+],
+c:0,
+e:"Suy luận cho phép từ những tri thức đã biết làm tiền đề rút ra tri thức mới theo những quy tắc logic nhất định.",
+tags:["Suy luận"]
+},
+
+{
+topic:"Logic học",
+level:"Vận dụng",
+q:"Nếu mọi sinh viên lớp A đều học logic và Thành là sinh viên lớp A, kết luận hợp logic là gì?",
+a:[
+"Thành không học logic",
+"Thành có thể học logic",
+"Thành học logic",
+"Không thể suy luận"
+],
+c:2,
+e:"Đây là cấu trúc suy luận trực tiếp từ mệnh đề toàn thể và trường hợp cá biệt.",
+tags:["Suy luận","Tam đoạn luận"]
+},
+
+{
+topic:"Mỹ học",
+level:"Nhận biết",
+q:"Đối tượng nghiên cứu cơ bản của mỹ học là gì?",
+a:[
+"Quan hệ thẩm mỹ của con người với hiện thực và các hình thái biểu hiện của nó",
+"Chỉ nghiên cứu hội họa",
+"Chỉ nghiên cứu âm nhạc",
+"Chỉ nghiên cứu thời trang"
+],
+c:0,
+e:"Mỹ học nghiên cứu quan hệ thẩm mỹ của con người với hiện thực cùng các quy luật, hình thức biểu hiện của đời sống thẩm mỹ.",
+tags:["Mỹ học"]
+},
+
+{
+topic:"Mỹ học",
+level:"Thông hiểu",
+q:"Cái đẹp trong đời sống thẩm mỹ có thể xuất hiện ở đâu?",
+a:[
+"Chỉ trong tác phẩm nghệ thuật",
+"Chỉ trong tự nhiên",
+"Trong tự nhiên, xã hội, con người và nghệ thuật",
+"Chỉ trong trí tưởng tượng"
+],
+c:2,
+e:"Cái đẹp có phạm vi rộng, xuất hiện trong tự nhiên, đời sống xã hội, con người và nghệ thuật.",
+tags:["Cái đẹp"]
+},
+
+{
+topic:"Đạo đức học",
+level:"Nhận biết",
+q:"Đạo đức có chức năng xã hội quan trọng nào?",
+a:[
+"Điều chỉnh hành vi con người thông qua các chuẩn mực",
+"Thay thế hoàn toàn pháp luật",
+"Loại bỏ mọi lợi ích cá nhân",
+"Chỉ phục vụ nghệ thuật"
+],
+c:0,
+e:"Đạo đức điều chỉnh hành vi con người thông qua hệ thống chuẩn mực, giá trị và các yêu cầu xã hội.",
+tags:["Đạo đức","Chuẩn mực"]
+},
+
+{
+topic:"Đạo đức học",
+level:"Thông hiểu",
+q:"Một hành vi đạo đức thường được đánh giá dựa trên yếu tố nào?",
+a:[
+"Chỉ dựa vào lợi ích vật chất",
+"Chuẩn mực và giá trị đạo đức của cộng đồng",
+"Chỉ dựa vào pháp luật",
+"Chỉ dựa vào cảm xúc nhất thời"
+],
+c:1,
+e:"Đánh giá đạo đức gắn với hệ thống chuẩn mực, giá trị và yêu cầu đạo đức của cộng đồng, xã hội.",
+tags:["Giá trị đạo đức"]
+},
+
+{
+topic:"Tôn giáo học",
+level:"Nhận biết",
+q:"Theo quan điểm của chủ nghĩa Mác–Lênin, tôn giáo là một hình thái ý thức xã hội phản ánh hiện thực như thế nào?",
+a:[
+"Phản ánh hiện thực một cách hư ảo",
+"Phản ánh hoàn toàn khoa học",
+"Không liên quan đến đời sống xã hội",
+"Chỉ là hiện tượng sinh học"
+],
+c:0,
+e:"Theo quan điểm Mác–Lênin, tôn giáo là sự phản ánh hiện thực khách quan một cách hư ảo, trong đó các lực lượng trần thế mang hình thức lực lượng siêu nhiên.",
+tags:["Tôn giáo"]
+},
+
+{
+topic:"Tôn giáo học",
+level:"Thông hiểu",
+q:"Một trong những nguyên tắc cơ bản trong chính sách tôn giáo ở Việt Nam là gì?",
+a:[
+"Tôn trọng và bảo đảm quyền tự do tín ngưỡng, tôn giáo theo pháp luật",
+"Cấm mọi hoạt động tôn giáo",
+"Chỉ cho phép một tôn giáo",
+"Loại bỏ mọi sinh hoạt tín ngưỡng"
+],
+c:0,
+e:"Quyền tự do tín ngưỡng, tôn giáo được Nhà nước Việt Nam ghi nhận và bảo đảm theo khuôn khổ pháp luật.",
+tags:["Tín ngưỡng","Tôn giáo"]
+},
+
+{
+topic:"Triết học Hy Lạp",
+level:"Nhận biết",
+q:"Ai được xem là người sáng lập Học viện (Academy) nổi tiếng ở Athens?",
+a:[
+"Plato",
+"Epicurus",
+"Zeno",
+"Democritus"
+],
+c:0,
+e:"Plato sáng lập Academy, một trung tâm giáo dục và triết học nổi tiếng của Athens cổ đại.",
+tags:["Plato"]
+},
+
+{
+topic:"Triết học Hy Lạp",
+level:"Thông hiểu",
+q:"Theo Aristotle, nguyên nhân nào giải thích mục đích hay 'cái để làm gì' của một sự vật?",
+a:[
+"Nguyên nhân vật chất",
+"Nguyên nhân hình thức",
+"Nguyên nhân tác động",
+"Nguyên nhân mục đích"
+],
+c:3,
+e:"Trong học thuyết bốn nguyên nhân của Aristotle, nguyên nhân mục đích giải thích cái vì sao hay mục đích của sự vật.",
+tags:["Aristotle","Bốn nguyên nhân"]
+},
+
+{
+topic:"Triết học Hy Lạp",
+level:"Vận dụng",
+q:"Quan niệm sống 'sống phù hợp với tự nhiên' thường được liên hệ với trường phái nào?",
+a:[
+"Khắc kỷ",
+"Hoài nghi",
+"Epicurus",
+"Elea"
+],
+c:0,
+e:"Đạo đức học Khắc kỷ nhấn mạnh việc sống phù hợp với tự nhiên và lý tính.",
+tags:["Khắc kỷ","Đạo đức"]
+},
+
+{
+topic:"Triết học phương Đông",
+level:"Nhận biết",
+q:"Khái niệm 'Đạo' giữ vị trí trung tâm trong triết học của ai?",
+a:[
+"Lão Tử",
+"Han Feizi",
+"Mozi",
+"Confucius"
+],
+c:0,
+e:"Trong Đạo gia, đặc biệt ở Lão Tử, Đạo là phạm trù trung tâm để giải thích nguồn gốc và nguyên lý vận động của thế giới.",
+tags:["Lão Tử","Đạo"]
+},
+
+{
+topic:"Triết học phương Đông",
+level:"Thông hiểu",
+q:"Tư tưởng 'nhân' giữ vị trí quan trọng trong hệ thống triết học nào?",
+a:[
+"Nho gia",
+"Pháp gia",
+"Đạo gia",
+"Mặc gia"
+],
+c:0,
+e:"Nhân là một phạm trù đạo đức quan trọng trong tư tưởng Khổng Tử và truyền thống Nho gia.",
+tags:["Khổng Tử","Nhân"]
+},
+
+{
+topic:"Triết học phương Đông",
+level:"Vận dụng",
+q:"Tư tưởng Pháp trị của Hàn Phi Tử nhấn mạnh yếu tố nào trong quản lý nhà nước?",
+a:[
+"Pháp luật, thuật và thế",
+"Chỉ giáo dục đạo đức",
+"Chỉ tự do cá nhân",
+"Loại bỏ hoàn toàn quyền lực"
+],
+c:0,
+e:"Hàn Phi Tử kết hợp các yếu tố pháp, thuật và thế trong tư tưởng chính trị Pháp gia.",
+tags:["Hàn Phi","Pháp gia"]
+},
+
+{
+topic:"Triết học cận–hiện đại",
+level:"Nhận biết",
+q:"Descartes nổi tiếng với mệnh đề nào?",
+a:[
+"Tôi tư duy, nên tôi tồn tại",
+"Con người là thước đo của vạn vật",
+"Tồn tại là được tri giác",
+"Tất cả là nước"
+],
+c:0,
+e:"Mệnh đề 'Cogito, ergo sum' là điểm xuất phát nổi tiếng trong triết học Descartes.",
+tags:["Descartes","Duy lý"]
+},
+
+{
+topic:"Triết học cận–hiện đại",
+level:"Thông hiểu",
+q:"Triết học của Kant thường được xem là nỗ lực kết hợp hoặc phê phán những giới hạn của hai khuynh hướng nào?",
+a:[
+"Chủ nghĩa duy lý và chủ nghĩa kinh nghiệm",
+"Khắc kỷ và Epicurus",
+"Nho giáo và Đạo giáo",
+"Pháp gia và Mặc gia"
+],
+c:0,
+e:"Kant tìm cách giải quyết những vấn đề do sự đối lập giữa chủ nghĩa duy lý và chủ nghĩa kinh nghiệm đặt ra.",
+tags:["Kant","Duy lý","Kinh nghiệm"]
+},
+
+{
+topic:"Triết học cận–hiện đại",
+level:"Vận dụng",
+q:"Trong triết học Rousseau, khái niệm nào giữ vai trò quan trọng đối với tư tưởng chính trị của ông?",
+a:[
+"Ý chí chung",
+"Nguyên tử",
+"Đạo",
+"Vô vi"
+],
+c:0,
+e:"'Ý chí chung' là khái niệm quan trọng trong tư tưởng chính trị của Rousseau, đặc biệt trong Bàn về khế ước xã hội.",
+tags:["Rousseau","Ý chí chung"]
+},
+
+{
+topic:"Mác–Lênin",
+level:"Nâng cao",
+q:"Theo quan điểm duy vật lịch sử, trong mối quan hệ giữa lực lượng sản xuất và quan hệ sản xuất, yếu tố nào giữ vai trò quyết định xét đến cùng đối với sự biến đổi của quan hệ sản xuất?",
+a:[
+"Lực lượng sản xuất",
+"Ý thức cá nhân",
+"Đạo đức",
+"Nghệ thuật"
+],
+c:0,
+e:"Sự phát triển của lực lượng sản xuất tạo ra cơ sở vật chất và những yêu cầu khách quan đối với sự biến đổi của quan hệ sản xuất.",
+tags:["Duy vật lịch sử","Lực lượng sản xuất"]
+}
+
+];
+
+
+/* =====================================================
+   TRẠNG THÁI ỨNG DỤNG
+   ===================================================== */
+
+let state = {
+
+    mode:"general",
+
+    topic:"all",
+
+    questions:[],
+
+    current:0,
+
+    answers:[],
+
+    score:0,
+
+    started:false,
+
+    finished:false,
+
+    shuffleAnswers:true
+
+};
+
+
+/* =====================================================
+   HÀM TIỆN ÍCH
+   ===================================================== */
+
+function shuffle(array){
+
+    const arr = [...array];
+
+    for(let i = arr.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+
+    }
+
+    return arr;
+}
+
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   CHẾ ĐỘ
+   ===================================================== */
+
+function setMode(mode,element){
+
+    state.mode = mode;
+
+    document.querySelectorAll(".mode").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    if(element){
+        element.classList.add("active");
+    }
+
+    if(mode === "adaptive"){
+
+        document.getElementById("difficulty").value = "all";
+
+    }
+
+}
+
+
+/* =====================================================
+   CHỦ ĐỀ
+   ===================================================== */
+
+function setTopic(topic,element){
+
+    state.topic = topic;
+
+    document.getElementById("topicSelect").value = topic;
+
+    document.querySelectorAll(".topic").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    if(element){
+        element.classList.add("active");
+    }
+
+}
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+function resetQuiz(){
+
+    state = {
+
+        mode:"general",
+
+        topic:"all",
+
+        questions:[],
+
+        current:0,
+
+        answers:[],
+
+        score:0,
+
+        started:false,
+
+        finished:false,
+
+        shuffleAnswers:true
+
+    };
+
+    document.getElementById("quiz").classList.remove("active");
+
+    document.getElementById("result").classList.remove("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   BẮT ĐẦU QUIZ
+   ===================================================== */
+
+function startQuiz(){
+
+    const count = parseInt(
+        document.getElementById("questionCount").value
+    );
+
+    const difficulty =
+        document.getElementById("difficulty").value;
+
+    const topic =
+        document.getElementById("topicSelect").value;
+
+    const shuffleAnswers =
+        document.getElementById("shuffleAnswers").value === "yes";
+
+
+    let pool = [...BANK];
+
+
+    /* Lọc chủ đề */
+
+    if(topic !== "all"){
+
+        pool = pool.filter(q => q.topic === topic);
+
+    }
+
+
+    /* Lọc độ khó */
+
+    if(difficulty !== "all"){
+
+        pool = pool.filter(q => q.level === difficulty);
+
+    }
+
+
+    /*
+       Nếu bộ lọc quá hẹp không đủ câu,
+       tự động lấy lại từ chủ đề trước.
+    */
+
+    if(pool.length < count){
+
+        if(topic !== "all"){
+
+            pool = BANK.filter(q => q.topic === topic);
+
+        }
+
+    }
+
+
+    /*
+       Nếu vẫn không đủ thì lấy toàn bộ ngân hàng.
+    */
+
+    if(pool.length < count){
+
+        pool = [...BANK];
+
+    }
+
+
+    pool = shuffle(pool);
+
+
+    state.questions =
+        pool.slice(0, Math.min(count,pool.length));
+
+
+    state.answers =
+        new Array(state.questions.length).fill(null);
+
+
+    state.current = 0;
+
+    state.score = 0;
+
+    state.started = true;
+
+    state.finished = false;
+
+    state.shuffleAnswers = shuffleAnswers;
+
+
+    document.getElementById("result")
+        .classList.remove("active");
+
+    document.getElementById("quiz")
+        .classList.add("active");
+
+
+    renderQuestion();
+
+
+    document.getElementById("quiz")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+}
+
+
+/* =====================================================
+   HIỂN THỊ CÂU HỎI
+   ===================================================== */
+
+function renderQuestion(){
+
+    if(!state.questions.length){
+
+        return;
+
+    }
+
+
+    const q =
+        state.questions[state.current];
+
+
+    document.getElementById("progressText").textContent =
+        `Câu ${state.current + 1} / ${state.questions.length}`;
+
+
+    document.getElementById("scoreText").textContent =
+        `Điểm: ${state.score}`;
+
+
+    const progress =
+        ((state.current + 1) / state.questions.length) * 100;
+
+
+    document.getElementById("progressBar").style.width =
+        progress + "%";
+
+
+    document.getElementById("questionTopic").textContent =
+        q.topic;
+
+
+    document.getElementById("questionLevel").textContent =
+        q.level;
+
+
+    document.getElementById("questionText").textContent =
+        q.q;
+
+
+    const answersContainer =
+        document.getElementById("answers");
+
+
+    answersContainer.innerHTML = "";
+
+
+    /*
+       Tạo danh sách đáp án.
+
+       index = vị trí gốc.
+    */
+
+    let answerList =
+        q.a.map((text,index)=>({
+            text:text,
+            index:index
+        }));
+
+
+    if(state.shuffleAnswers){
+
+        answerList = shuffle(answerList);
+
+    }
+
+
+    answerList.forEach((item,displayIndex)=>{
+
+        const button =
+            document.createElement("button");
+
+
+        button.className = "answer";
+
+
+        button.textContent =
+            `${String.fromCharCode(65 + displayIndex)}. ${item.text}`;
+
+
+        button.dataset.index =
+            item.index;
+
+
+        button.onclick = function(){
+
+            answerQuestion(item.index);
+
+        };
+
+
+        answersContainer.appendChild(button);
+
+    });
+
+
+    const previousAnswer =
+        state.answers[state.current];
+
+
+    if(previousAnswer !== null){
+
+        showAnswer(previousAnswer);
+
+    }
+
+
+    document.getElementById("nextBtn").textContent =
+        state.current === state.questions.length - 1
+        ? "Hoàn thành ✓"
+        : "Câu tiếp →";
+
+
+    updateStatistics();
+
+}
+
+
+/* =====================================================
+   TRẢ LỜI
+   ===================================================== */
+
+function answerQuestion(index){
+
+    if(state.answers[state.current] !== null){
+
+        return;
+
+    }
+
+
+    state.answers[state.current] = index;
+
+
+    if(index === state.questions[state.current].c){
+
+        state.score++;
+
+    }
+
+
+    showAnswer(index);
+
+    updateStatistics();
+
+}
+
+
+/* =====================================================
+   HIỂN THỊ ĐÁP ÁN + GIẢI THÍCH
+   ===================================================== */
+
+function showAnswer(selected){
+
+    const q =
+        state.questions[state.current];
+
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+
+    buttons.forEach(button=>{
+
+        const index =
+            parseInt(button.dataset.index);
+
+
+        button.classList.add("disabled");
+
+
+        if(index === q.c){
+
+            button.classList.add("correct");
+
+        }
+
+
+        if(index === selected && selected !== q.c){
+
+            button.classList.add("wrong");
+
+        }
+
+    })
+  
